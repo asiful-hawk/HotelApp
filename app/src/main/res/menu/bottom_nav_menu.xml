@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/search_foreground"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/trending_foreground"
+        android:title="Trending" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/login_foreground"
+        android:title="Sign in" />
+
+</menu>
