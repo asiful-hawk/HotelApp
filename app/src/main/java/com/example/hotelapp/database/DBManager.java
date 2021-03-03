@@ -41,8 +41,7 @@ public class DBManager {
 
 
     public Cursor fetch() {
-        String[] cname = cursor.getColumnNames();
-        cursor = this.database.query(DBHelper.USER_TABLE, cname, null, null, null, null, null);
+        cursor = this.database.rawQuery("SELECT * FROM " + DBHelper.USER_TABLE, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }

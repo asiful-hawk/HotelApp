@@ -1,6 +1,7 @@
 package com.example.hotelapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +11,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.hotelapp.Client.RestClient;
 import com.example.hotelapp.Model.User;
 import com.example.hotelapp.RestService.RoomService;
 import com.example.hotelapp.database.DBHelper;
+import com.example.hotelapp.ui.notifications.NotificationsFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,13 +57,26 @@ public class AskLog extends AppCompatActivity {
                     public void onResponse(Call<User> call, Response<User> response) {
 
                         User user = response.body();
+
                         String uname = response.body().getName();
                         String uemail = response.body().getEmail();
                         double pay = response.body().getPayment();
                         int roomid = response.body().getRoomId();
                         Date rsfrm = response.body().getReserveFrom();
                         Date rstl = response.body().getReserveTill();
-                        insertData(uname,uemail, pay, roomid, rsfrm, rstl);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("uname", uname);
+                        bundle.putString("uemail", uemail);
+                        bundle.putString("pay", String.valueOf(pay));
+                        bundle.putString("roomId", String.valueOf(roomid));
+                        bundle.putString("reserveDate", String.valueOf(rsfrm));
+                        bundle.putString("reserveTill", String.valueOf(rstl));
+                        Intent intent = new Intent(AskLog.this, NotificationsFragment.class);
+                        intent.putExtras(bundle);
+                        Fragment fragment = new Fragment();
+                        fragment.setArguments(bundle);
+                        startActivity(intent);
+                        
 
                     }
                     @Override
